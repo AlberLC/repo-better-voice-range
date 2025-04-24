@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterVoiceRange", "BetterVoiceRange\BetterVoiceRange.csproj", "{1B69DC97-375F-467C-BBB0-8A9074930529}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterVoiceRange", "BetterVoiceRange\BetterVoiceRange.csproj", "{C70AF628-6792-42C6-ACFF-9D7706A9994C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1B69DC97-375F-467C-BBB0-8A9074930529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B69DC97-375F-467C-BBB0-8A9074930529}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B69DC97-375F-467C-BBB0-8A9074930529}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B69DC97-375F-467C-BBB0-8A9074930529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C70AF628-6792-42C6-ACFF-9D7706A9994C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C70AF628-6792-42C6-ACFF-9D7706A9994C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C70AF628-6792-42C6-ACFF-9D7706A9994C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C70AF628-6792-42C6-ACFF-9D7706A9994C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4DA57814-CAAF-4B4B-A171-BB1B5385A02B}
+		SolutionGuid = {BF55E4AB-DAEA-4122-A9AB-E52A4B733501}
 	EndGlobalSection
 EndGlobal

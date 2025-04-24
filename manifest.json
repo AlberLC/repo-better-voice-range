@@ -1,9 +1,9 @@
 {
-    "name": "BetterVoiceRange",
-    "version_number": "1.0.0",
-    "website_url": "https://github.com/thunderstore-io",
-    "description": "Allows customization of how voice audio behaves based on distance and walls.",
-    "dependencies": [
-        "BepInEx-BepInExPack-5.4.2100"
-    ]
+  "name": "BetterVoiceRange",
+  "version_number": "1.0.1",
+  "website_url": "https://github.com/AlberLC/repo-better-voice-range",
+  "description": "Allows customization of how voice audio behaves based on distance and walls.",
+  "dependencies": [
+    "BepInEx-BepInExPack-5.4.2100"
+  ]
 }
