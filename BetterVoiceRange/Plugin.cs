@@ -16,18 +16,22 @@ public class Plugin : BaseUnityPlugin
     private static FieldInfo audioSourceField;
     private static FieldInfo ttsAudioSourceField;
     private static FieldInfo lowPassLogicField;
+    private static FieldInfo volumeMultiplierField;
+    private static FieldInfo falloffMultiplierField;
 
     private void Awake()
-    {
-        spatialBlend = Config.Bind("Options", "SpatialBlend", 0.5f, "Controls how much voice volume decreases with distance. The original game value is 1.0.");
-        lowPassVolumeMultiplier = Config.Bind("Options", "LowPassVolumeMultiplier", 0.75f, "Multiplier applied to the voice volume when behind walls. The original game value is 0.5.");
-        lowPassFallOffMultiplier = Config.Bind("Options", "LowPassFallOffMultiplier", 0.9f, "Controls how quickly the low-pass effect increases with distance when the speaker is behind a wall. The original game value is 0.8.");
+    {        
+        lowPassFallOffMultiplier = Config.Bind("Options", "LowPassFallOffMultiplier", 1f, new ConfigDescription("This is the important value. It's the multiplier applied to voice volume over distance through walls. The higher it is, the greater the voice range. Original game value: 0.8.", new AcceptableValueRange<float>(0f, 3f)));
+        lowPassVolumeMultiplier = Config.Bind("Options", "LowPassVolumeMultiplier", 0.5f, new ConfigDescription("Multiplier applied to the voice volume when behind walls. Original game value: 0.5.", new AcceptableValueRange<float>(0f, 3f)));        
+        spatialBlend = Config.Bind("Options", "SpatialBlend", 0.1f, new ConfigDescription("This value might bug the rest. Controls how much voice volume decreases with distance. Original game value: 1.0.", new AcceptableValueRange<float>(0f, 3f)));        
 
         Type playerVoiceChatType = typeof(PlayerVoiceChat);
-
         audioSourceField = playerVoiceChatType.GetField("audioSource", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         ttsAudioSourceField = playerVoiceChatType.GetField("ttsAudioSource", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         lowPassLogicField = playerVoiceChatType.GetField("lowPassLogic", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        Type audioLowPassLogicType = typeof(AudioLowPassLogic);
+        volumeMultiplierField = audioLowPassLogicType.GetField("VolumeMultiplier", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        falloffMultiplierField = audioLowPassLogicType.GetField("FalloffMultiplier", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
         var harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
         harmony.PatchAll(typeof(Plugin));
@@ -38,16 +42,12 @@ public class Plugin : BaseUnityPlugin
     private static void UpdateSpatialBlend(PlayerVoiceChat __instance)
     {
         AudioSource audioSource = audioSourceField?.GetValue(__instance) as AudioSource;
-        AudioSource ttsAudioSource = ttsAudioSourceField?.GetValue(__instance) as AudioSource;
-        AudioLowPassLogic lowPassLogic = lowPassLogicField?.GetValue(__instance) as AudioLowPassLogic;
-
+        AudioSource ttsAudioSource = ttsAudioSourceField?.GetValue(__instance) as AudioSource;        
         audioSource.spatialBlend = spatialBlend.Value;
         ttsAudioSource.spatialBlend = audioSource.spatialBlend;
 
-        FieldInfo volumeMultiplierField = lowPassLogic.GetType().GetField("VolumeMultiplier", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        volumeMultiplierField.SetValue(lowPassLogic, lowPassVolumeMultiplier.Value);
-
-        FieldInfo falloffMultiplierField = lowPassLogic.GetType().GetField("FalloffMultiplier", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        AudioLowPassLogic lowPassLogic = lowPassLogicField?.GetValue(__instance) as AudioLowPassLogic;
+        volumeMultiplierField.SetValue(lowPassLogic, lowPassVolumeMultiplier.Value);        
         falloffMultiplierField.SetValue(lowPassLogic, lowPassFallOffMultiplier.Value);
     }
 }
