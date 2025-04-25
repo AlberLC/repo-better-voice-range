@@ -4,7 +4,6 @@ A simple mod for [R.E.P.O.](https://store.steampowered.com/app/3241660/REPO/) th
 
 ## Configuration
 
-- **SpatialBlend**: controls how much voice volume decreases with distance. Original game value: 1.0. Mod default value: 0.5.
-- **LowPassVolumeMultiplier**: multiplier applied to the voice volume when behind walls. Original game value: 0.5. Mod default value: 0.75.
-- **LowPassFallOffMultiplier**: controls how quickly the low-pass effect increases with distance when the speaker is behind a wall. Original game value: 0.8. Mod default value: 0.9.
-
+- **LowPassFallOffMultiplier**: This is the important value. It's the multiplier applied to voice volume over distance through walls. The higher it is, the greater the voice range. Original game value: `0.8`. Mod default value: `1.0`.
+- **LowPassVolumeMultiplier**: Multiplier applied to the voice volume when behind walls. Original game value: `0.5`. Mod default value: `0.5`.
+- **SpatialBlend**: This value might bug the rest. Controls how much voice volume decreases with distance. Original game value: `1.0`. Mod default value: `1.0`.
